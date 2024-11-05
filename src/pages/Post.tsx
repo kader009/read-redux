@@ -1,5 +1,12 @@
 import { useAllPostQuery } from '../redux/api/PostApi';
 
+interface Posts {
+  body: string;
+  id: number;
+  title: string;
+  userId: string;
+}
+
 const ApiPost = () => {
   const { data, isLoading } = useAllPostQuery('');
   console.log(data);
@@ -12,9 +19,9 @@ const ApiPost = () => {
     );
   }
   return (
-    <div className="flex justify-center items-center lg:flex-row min-h-screen">
+    <div className="text-center">
       <h1>All user post here</h1>
-      {data.map((post) => (
+      {data.map((post: Posts) => (
         <div key={post.id}>
           <span>{post.title}</span>
         </div>
