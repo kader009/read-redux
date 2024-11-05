@@ -1,12 +1,14 @@
-import Reducer from './pages/Reducer';
+import ApiPost from './pages/Post';
+// import Reducer from './pages/Reducer';
 
 // import TodoList from "./pages/TodoList";
 
 const App = () => {
   return (
     <div>
-      <Reducer />
+      {/* <Reducer /> */}
       {/* <TodoList/> */}
+      <ApiPost />
     </div>
   );
 };

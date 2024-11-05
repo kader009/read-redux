@@ -11,3 +11,5 @@ export const postApi = createApi({
     }),
   }),
 });
+
+export const { useAllPostQuery } = postApi;
