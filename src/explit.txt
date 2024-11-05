@@ -1,0 +1,10 @@
+useCallback = use for function optimization
+useMemo = use for values optimization
+Memo = use for child re-render
+
+
+
+
+
+
+
