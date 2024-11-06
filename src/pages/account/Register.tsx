@@ -8,31 +8,13 @@ import {
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { RootState } from '../../redux/store';
 
-// interface FormData {
-//   name: string;
-//   email: string;
-//   password: string;
-// }
-
 const RegisterForm = () => {
   const dispatch = useAppDispatch();
   const { name, email, password } = useAppSelector(
     (state: RootState) => state.register
   );
-  // const [formData, setFormData] = useState<FormData>({
-  //   name: '',
-  //   email: '',
-  //   password: '',
-  // });
-  const [signUp] = useSignUpMutation();
 
-  // const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-  //   const { name, value } = e.target;
-  //   setFormData((prevData) => ({
-  //     ...prevData,
-  //     [name]: value,
-  //   }));
-  // };
+  const [signUp] = useSignUpMutation();
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
