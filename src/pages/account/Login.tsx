@@ -3,14 +3,14 @@ import { useLoginMutation } from '../../redux/authentication/authApi';
 import {
   SetEmail,
   SetPassword,
-} from '../../redux/authentication/RegisterSlice';
+} from '../../redux/authentication/LoginSlice';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { RootState } from '../../redux/store';
 
 const LoginPage = () => {
   const dispatch = useAppDispatch();
   const { email, password } = useAppSelector(
-    (state: RootState) => state.register
+    (state: RootState) => state.login
   );
 
   const [login] = useLoginMutation()

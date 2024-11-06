@@ -2,6 +2,7 @@ import { configureStore } from '@reduxjs/toolkit';
 import counterRducer from './feature/CounterSlice';
 import todoReducer from './feature/TodoSlice';
 import registerReducer from './authentication/RegisterSlice'
+import loginReducer from './authentication/LoginSlice'
 import { baseApi } from './authentication/baseApi';
 import { postApi } from './api/PostApi';
 
@@ -11,7 +12,8 @@ export const store = configureStore({
     [baseApi.reducerPath]: baseApi.reducer,
     counter: counterRducer,
     todos: todoReducer,
-    register: registerReducer
+    register: registerReducer,
+    login: loginReducer
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(baseApi.middleware, postApi.middleware),
 });
