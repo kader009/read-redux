@@ -1,4 +1,4 @@
-import { useState, ChangeEvent, FormEvent } from 'react';
+import { FormEvent } from 'react';
 import { useSignUpMutation } from '../../redux/authentication/authApi';
 import {
   SetEmail,
@@ -8,36 +8,37 @@ import {
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { RootState } from '../../redux/store';
 
-interface FormData {
-  name: string;
-  email: string;
-  password: string;
-}
+// interface FormData {
+//   name: string;
+//   email: string;
+//   password: string;
+// }
 
 const RegisterForm = () => {
   const dispatch = useAppDispatch();
   const { name, email, password } = useAppSelector(
     (state: RootState) => state.register
   );
-  const [formData, setFormData] = useState<FormData>({
-    name: '',
-    email: '',
-    password: '',
-  });
+  // const [formData, setFormData] = useState<FormData>({
+  //   name: '',
+  //   email: '',
+  //   password: '',
+  // });
   const [signUp] = useSignUpMutation();
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
-  };
+  // const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+  //   const { name, value } = e.target;
+  //   setFormData((prevData) => ({
+  //     ...prevData,
+  //     [name]: value,
+  //   }));
+  // };
 
-  const handleSubmit = (e: FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
+    const user = await signUp({ name, email, password });
     // Handle form submission logic here
-    console.log('Form data:', formData);
+    console.log('user data:', user);
   };
 
   return (
@@ -62,8 +63,8 @@ const RegisterForm = () => {
             type="text"
             name="name"
             id="name"
-            value={formData.name}
-            onChange={(e) => SetName(e.target.value)}
+            value={name}
+            onChange={(e) => dispatch(SetName(e.target.value))}
             required
             className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             placeholder="Enter your name"
@@ -82,8 +83,8 @@ const RegisterForm = () => {
             type="email"
             name="email"
             id="email"
-            value={formData.email}
-            onChange={(e) => SetEmail(e.target.value)}
+            value={email}
+            onChange={(e) => dispatch(SetEmail(e.target.value))}
             required
             className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             placeholder="Enter your email"
@@ -102,8 +103,8 @@ const RegisterForm = () => {
             type="password"
             name="password"
             id="password"
-            value={formData.password}
-            onChange={(e) => SetPassword(e.target.value)}
+            value={password}
+            onChange={(e) => dispatch(SetPassword(e.target.value))}
             required
             className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             placeholder="Enter your password"

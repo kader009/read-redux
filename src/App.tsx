@@ -1,4 +1,4 @@
-// import ApiPost from './pages/Post';
+import ApiPost from './pages/Post';
 // import Reducer from './pages/Reducer';
 
 import RegisterForm from "./pages/account/Register";
@@ -10,7 +10,7 @@ const App = () => {
     <div>
       {/* <Reducer /> */}
       {/* <TodoList/> */}
-      {/* <ApiPost /> */}
+      <ApiPost />
       <RegisterForm/>
     </div>
   );
