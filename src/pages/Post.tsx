@@ -8,8 +8,7 @@ interface Posts {
 }
 
 const ApiPost = () => {
-  const { data, isLoading } = useAllPostQuery('');
-  console.log(data);
+  const { data, isLoading, refetch } = useAllPostQuery('');
 
   if (isLoading) {
     return (
