@@ -17,6 +17,15 @@ const authApi = baseApi.injectEndpoints({
         body: userInfo,
       }),
     }),
+
+    addPost: build.mutation({
+      query: (postInfo) => ({
+        url: '/post',
+        method: 'POST',
+        body: postInfo,
+      }),
+    }),
+    
   }),
 });
 
