@@ -9,6 +9,7 @@ import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { RootState } from '../../redux/store';
 import { registrationSchema } from '../../validation/registerValidation';
 import { z } from 'zod';
+import toast from 'react-hot-toast';
 
 interface ValidationErrors {
   [key: string]: string | undefined;
@@ -31,6 +32,7 @@ const RegisterForm = () => {
       registrationSchema.parse({ name, email, password });
       const user = await signUp({ name, email, password });
       console.log('user data:', user);
+      toast.success(user?.data?.message)
 
       dispatch(SetName(''))
       dispatch(SetEmail(''))

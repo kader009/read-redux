@@ -7,6 +7,7 @@ import { NextUIProvider } from '@nextui-org/react';
 import ContextApi from './context/ContextApi';
 import { Provider } from 'react-redux';
 import { store } from './redux/store';
+import { Toaster } from 'react-hot-toast';
 
 const queryClient = new QueryClient();
 
@@ -17,6 +18,7 @@ createRoot(document.getElementById('root')!).render(
         <ContextApi>
           <Provider store={store}>
             <App />
+            <Toaster />
           </Provider>
         </ContextApi>
       </QueryClientProvider>
