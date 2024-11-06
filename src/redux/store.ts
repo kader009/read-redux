@@ -1,8 +1,9 @@
 import { configureStore } from '@reduxjs/toolkit';
 import counterRducer from './feature/CounterSlice';
 import todoReducer from './feature/TodoSlice';
-import registerReducer from './authentication/RegisterSlice'
-import loginReducer from './authentication/LoginSlice'
+import registerReducer from './authentication/RegisterSlice';
+import loginReducer from './authentication/LoginSlice';
+import postReducer from './authentication/postSlice';
 import { baseApi } from './authentication/baseApi';
 import { postApi } from './api/PostApi';
 
@@ -13,9 +14,11 @@ export const store = configureStore({
     counter: counterRducer,
     todos: todoReducer,
     register: registerReducer,
-    login: loginReducer
+    login: loginReducer,
+    post: postReducer,
   },
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(baseApi.middleware, postApi.middleware),
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().concat(baseApi.middleware, postApi.middleware),
 });
 
 export type RootState = ReturnType<typeof store.getState>;

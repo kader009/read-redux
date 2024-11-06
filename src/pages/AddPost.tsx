@@ -1,18 +1,30 @@
-import { FormEvent, useState } from 'react';
+import { FormEvent, useEffect } from 'react';
 import { useAddPostMutation } from '../redux/authentication/authApi';
+import { useAppDispatch, useAppSelector } from '../redux/hooks';
+import { SetText } from '../redux/authentication/postSlice';
+import { RootState } from '../redux/store';
+import toast from 'react-hot-toast';
 
 const AddPost = () => {
   const [addPost, { isLoading, isSuccess }] = useAddPostMutation();
-  const [title, setTitle] = useState('');
+  const dispatch = useAppDispatch();
+  const { text } = useAppSelector((state: RootState) => state.post);
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     try {
-      await addPost({ title });
+      await addPost({ text });
+      toast.success('Post added successfully!');
     } catch (err) {
       console.error('Error adding post', err);
     }
   };
+
+  useEffect(() => {
+    if (isSuccess) {
+      dispatch(SetText(''));
+    }
+  }, [isSuccess, dispatch]);
 
   return (
     <form
@@ -22,9 +34,8 @@ const AddPost = () => {
       <input
         className="w-22 px-4 py-1 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
         type="text"
-        value={title}
-        onChange={(e) => setTitle(e.target.value)}
-        required
+        value={text}
+        onChange={(e) => dispatch(SetText(e.target.value))}
       />
       <button
         type="submit"
@@ -33,7 +44,6 @@ const AddPost = () => {
       >
         {isLoading ? 'Adding...' : 'Add Post'}
       </button>
-      {isSuccess && <p>Post added successfully!</p>}
     </form>
   );
 };
