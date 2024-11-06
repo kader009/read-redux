@@ -3,6 +3,7 @@
 
 import LoginPage from "./pages/account/Login";
 import RegisterForm from "./pages/account/Register";
+import AddPost from "./pages/AddPost";
 
 // import TodoList from "./pages/TodoList";
 
@@ -14,6 +15,7 @@ const App = () => {
       {/* <ApiPost /> */}
       <RegisterForm/>
       <LoginPage/>
+      <AddPost/>
     </div>
   );
 };

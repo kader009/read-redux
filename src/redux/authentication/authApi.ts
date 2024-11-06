@@ -25,8 +25,8 @@ const authApi = baseApi.injectEndpoints({
         body: postInfo,
       }),
     }),
-    
+
   }),
 });
 
-export const { useSignUpMutation, useLoginMutation } = authApi;
+export const { useSignUpMutation, useLoginMutation,useAddPostMutation } = authApi;
