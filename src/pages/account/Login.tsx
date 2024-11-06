@@ -1,24 +1,21 @@
 import { FormEvent } from 'react';
 import { useLoginMutation } from '../../redux/authentication/authApi';
-import {
-  SetEmail,
-  SetPassword,
-} from '../../redux/authentication/LoginSlice';
+import { SetEmail, SetPassword } from '../../redux/authentication/LoginSlice';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { RootState } from '../../redux/store';
+import toast from 'react-hot-toast';
 
 const LoginPage = () => {
   const dispatch = useAppDispatch();
-  const { email, password } = useAppSelector(
-    (state: RootState) => state.login
-  );
+  const { email, password } = useAppSelector((state: RootState) => state.login);
 
-  const [login] = useLoginMutation()
+  const [login] = useLoginMutation();
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     const user = await login({ email, password });
     console.log('user data:', user);
+    toast.success(user?.data?.message);
   };
 
   return (
