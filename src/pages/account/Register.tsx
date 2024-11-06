@@ -1,4 +1,4 @@
-import { FormEvent } from 'react';
+import { FormEvent, useState } from 'react';
 import { useSignUpMutation } from '../../redux/authentication/authApi';
 import {
   SetEmail,
@@ -7,8 +7,15 @@ import {
 } from '../../redux/authentication/RegisterSlice';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { RootState } from '../../redux/store';
+import { registrationSchema } from '../../validation/registerValidation';
+import { z } from 'zod';
+
+interface ValidationErrors {
+  [key: string]: string | undefined;
+}
 
 const RegisterForm = () => {
+  const [errors, setErrors] = useState<ValidationErrors>({});
   const dispatch = useAppDispatch();
   const { name, email, password } = useAppSelector(
     (state: RootState) => state.register
@@ -18,8 +25,24 @@ const RegisterForm = () => {
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    const user = await signUp({ name, email, password });
-    console.log('user data:', user);
+    setErrors({});
+
+    try {
+      registrationSchema.parse({ name, email, password });
+      const user = await signUp({ name, email, password });
+      console.log('user data:', user);
+    } catch (err) {
+      if (err instanceof z.ZodError) {
+        // Capture Zod validation errors and map them to the validationErrors state
+        const validationErrors: ValidationErrors = {};
+        err.errors.forEach((error) => {
+          validationErrors[error.path[0]] = error.message;
+        });
+
+        // Update the state with validation errors
+        setErrors(validationErrors);
+      }
+    }
   };
 
   return (
@@ -45,10 +68,10 @@ const RegisterForm = () => {
             id="name"
             value={name}
             onChange={(e) => dispatch(SetName(e.target.value))}
-            required
             className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             placeholder="Enter your name"
           />
+          {errors.name && <p className="text-red-600 text-sm">{errors.name}</p>}
         </div>
 
         <div>
@@ -64,10 +87,12 @@ const RegisterForm = () => {
             id="email"
             value={email}
             onChange={(e) => dispatch(SetEmail(e.target.value))}
-            required
             className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             placeholder="Enter your email"
           />
+          {errors.email && (
+            <p className="text-red-600 text-sm">{errors.email}</p>
+          )}
         </div>
 
         <div>
@@ -83,10 +108,12 @@ const RegisterForm = () => {
             id="password"
             value={password}
             onChange={(e) => dispatch(SetPassword(e.target.value))}
-            required
             className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             placeholder="Enter your password"
           />
+          {errors.password && (
+            <p className="text-red-600 text-sm">{errors.password}</p>
+          )}
         </div>
 
         <button
