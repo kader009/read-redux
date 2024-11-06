@@ -1,6 +1,7 @@
-import ApiPost from './pages/Post';
+// import ApiPost from './pages/Post';
 // import Reducer from './pages/Reducer';
 
+import LoginPage from "./pages/account/Login";
 import RegisterForm from "./pages/account/Register";
 
 // import TodoList from "./pages/TodoList";
@@ -10,8 +11,9 @@ const App = () => {
     <div>
       {/* <Reducer /> */}
       {/* <TodoList/> */}
-      <ApiPost />
+      {/* <ApiPost /> */}
       <RegisterForm/>
+      <LoginPage/>
     </div>
   );
 };

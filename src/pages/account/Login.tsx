@@ -1,24 +1,23 @@
 import { FormEvent } from 'react';
-import { useSignUpMutation } from '../../redux/authentication/authApi';
+import { useLoginMutation } from '../../redux/authentication/authApi';
 import {
   SetEmail,
-  SetName,
   SetPassword,
 } from '../../redux/authentication/RegisterSlice';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { RootState } from '../../redux/store';
 
-const RegisterForm = () => {
+const LoginPage = () => {
   const dispatch = useAppDispatch();
-  const { name, email, password } = useAppSelector(
+  const { email, password } = useAppSelector(
     (state: RootState) => state.register
   );
 
-  const [signUp] = useSignUpMutation();
+  const [login] = useLoginMutation()
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    const user = await signUp({ name, email, password });
+    const user = await login({ email, password });
     console.log('user data:', user);
   };
 
@@ -29,27 +28,8 @@ const RegisterForm = () => {
         className="w-full max-w-md p-8 space-y-6 bg-white rounded-lg shadow-md"
       >
         <h2 className="text-2xl font-semibold text-center text-gray-800">
-          Register
+          Login
         </h2>
-
-        <div>
-          <label
-            htmlFor="name"
-            className="block mb-2 text-sm font-medium text-gray-600"
-          >
-            Name
-          </label>
-          <input
-            type="text"
-            name="name"
-            id="name"
-            value={name}
-            onChange={(e) => dispatch(SetName(e.target.value))}
-            required
-            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-            placeholder="Enter your name"
-          />
-        </div>
 
         <div>
           <label
@@ -93,11 +73,11 @@ const RegisterForm = () => {
           type="submit"
           className="w-full py-2 text-white bg-blue-500 rounded-md hover:bg-blue-600 focus:outline-none"
         >
-          Register
+          Login
         </button>
       </form>
     </div>
   );
 };
 
-export default RegisterForm;
+export default LoginPage;
