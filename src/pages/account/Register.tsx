@@ -1,4 +1,12 @@
 import { useState, ChangeEvent, FormEvent } from 'react';
+import { useSignUpMutation } from '../../redux/authentication/authApi';
+import {
+  SetEmail,
+  SetName,
+  SetPassword,
+} from '../../redux/authentication/RegisterSlice';
+import { useAppDispatch, useAppSelector } from '../../redux/hooks';
+import { RootState } from '../../redux/store';
 
 interface FormData {
   name: string;
@@ -7,11 +15,16 @@ interface FormData {
 }
 
 const RegisterForm = () => {
+  const dispatch = useAppDispatch();
+  const { name, email, password } = useAppSelector(
+    (state: RootState) => state.register
+  );
   const [formData, setFormData] = useState<FormData>({
     name: '',
     email: '',
     password: '',
   });
+  const [signUp] = useSignUpMutation();
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -50,7 +63,7 @@ const RegisterForm = () => {
             name="name"
             id="name"
             value={formData.name}
-            onChange={handleChange}
+            onChange={(e) => SetName(e.target.value)}
             required
             className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             placeholder="Enter your name"
@@ -70,7 +83,7 @@ const RegisterForm = () => {
             name="email"
             id="email"
             value={formData.email}
-            onChange={handleChange}
+            onChange={(e) => SetEmail(e.target.value)}
             required
             className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             placeholder="Enter your email"
@@ -90,7 +103,7 @@ const RegisterForm = () => {
             name="password"
             id="password"
             value={formData.password}
-            onChange={handleChange}
+            onChange={(e) => SetPassword(e.target.value)}
             required
             className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             placeholder="Enter your password"
