@@ -19,9 +19,9 @@ const Allpost = () => {
     <div>
       <h1 className="text-center capitalize">All post here</h1>
       <div className="my-8">
-        <div className="space-y-3 flex gap-3 justify-center items-center">
+        <div className="flex gap-3 justify-center items-center">
           {data.map((post: Posts) => (
-            <div key={post._id} className="flex justify-center">
+            <div key={post._id} className="">
               <h1 className="bg-black p-2 text-white rounded">{post.text}</h1>
             </div>
           ))}
