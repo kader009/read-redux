@@ -22,7 +22,7 @@ const Allpost = () => {
         <div className="flex gap-3 justify-center items-center">
           {data.map((post: Posts) => (
             <div key={post._id} className="">
-              <h1 className="bg-black p-2 text-white rounded">{post.text}</h1>
+              <h1 className="bg-black p-2 text-white rounded mb-10">{post.text}</h1>
             </div>
           ))}
         </div>
