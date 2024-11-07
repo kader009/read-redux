@@ -27,10 +27,9 @@ const authApi = baseApi.injectEndpoints({
     }),
 
     getAllpost: build.query({
-      query: (postingInfo) => ({
+      query: () => ({
         url: '/post',
-        method: 'POST',
-        body: postingInfo,
+        method: 'GET',
       }),
     }),
   }),
