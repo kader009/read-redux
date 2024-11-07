@@ -27,10 +27,18 @@ const authApi = baseApi.injectEndpoints({
     }),
 
     getAllpost: build.query({
-      query: () => '/post',
+      query: (postingInfo) => ({
+        url: '/post',
+        method: 'POST',
+        body: postingInfo,
+      }),
     }),
   }),
 });
 
-export const { useSignUpMutation, useLoginMutation, useAddPostMutation, useGetAllpostQuery } =
-  authApi;
+export const {
+  useSignUpMutation,
+  useLoginMutation,
+  useAddPostMutation,
+  useGetAllpostQuery,
+} = authApi;
