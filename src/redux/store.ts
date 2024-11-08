@@ -18,7 +18,10 @@ export const store = configureStore({
     post: postReducer,
   },
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(baseApi.middleware, postApi.middleware),
+    getDefaultMiddleware({ serializableCheck: false }).concat(
+      baseApi.middleware,
+      postApi.middleware
+    ),
 });
 
 export type RootState = ReturnType<typeof store.getState>;
