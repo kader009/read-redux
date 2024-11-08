@@ -29,7 +29,7 @@ const AddPost = () => {
   return (
     <form
       onSubmit={handleSubmit}
-      className="flex justify-center items-center min-h-screen"
+      className="flex justify-center items-center my-10"
     >
       <input
         className="w-22 px-4 py-1 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
