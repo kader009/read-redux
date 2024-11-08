@@ -24,16 +24,17 @@ const authApi = baseApi.injectEndpoints({
         method: 'POST',
         body: postInfo,
       }),
-      invalidatesTags:['todo']
+      invalidatesTags: ['todo'],
     }),
 
     getAllpost: build.query({
       query: (priority) => ({
         url: '/post',
         method: 'GET',
-        params: {'priority': priority}
+        params: { priority: priority },
+        timeout: 1000
       }),
-      providesTags:['todo']
+      providesTags: ['todo'],
     }),
   }),
 });
