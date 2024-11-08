@@ -6,7 +6,7 @@ interface Posts {
 }
 
 const Allpost = () => {
-  const { data, isLoading } = useGetAllpostQuery('', { pollingInterval: 500 });
+  const { data, isLoading } = useGetAllpostQuery('');
 
   if (isLoading) {
     return (
