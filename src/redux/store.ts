@@ -8,8 +8,7 @@ import { baseApi } from './authentication/baseApi';
 import { postApi } from './api/PostApi';
 import { createLogger } from 'redux-logger';
 
-
-const logger = createLogger()
+const logger = createLogger();
 
 export const store = configureStore({
   reducer: {
@@ -25,6 +24,7 @@ export const store = configureStore({
     getDefaultMiddleware({ serializableCheck: false }).concat(
       baseApi.middleware,
       postApi.middleware,
+      logger
     ),
 });
 
