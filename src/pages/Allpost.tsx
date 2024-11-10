@@ -1,4 +1,4 @@
-import { useGetAllpostQuery } from '../redux/authentication/authApi';
+import { useGetAllpostQuery } from '../redux/authentication/endApi';
 
 interface Posts {
   _id: string;

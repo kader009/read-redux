@@ -1,5 +1,5 @@
 import { FormEvent, useEffect } from 'react';
-import { useAddPostMutation } from '../redux/authentication/authApi';
+import { useAddPostMutation } from '../redux/authentication/endApi';
 import { useAppDispatch, useAppSelector } from '../redux/hooks';
 import { SetText } from '../redux/authentication/postSlice';
 import { RootState } from '../redux/store';

@@ -1,5 +1,5 @@
 import { FormEvent, useState } from 'react';
-import { useSignUpMutation } from '../../redux/authentication/authApi';
+import { useSignUpMutation } from '../../redux/authentication/endApi';
 import {
   SetEmail,
   SetName,
@@ -32,11 +32,11 @@ const RegisterForm = () => {
       registrationSchema.parse({ name, email, password });
       const user = await signUp({ name, email, password });
       console.log('user data:', user);
-      toast.success(user?.data?.message)
+      toast.success(user?.data?.message);
 
-      dispatch(SetName(''))
-      dispatch(SetEmail(''))
-      dispatch(SetPassword(''))
+      dispatch(SetName(''));
+      dispatch(SetEmail(''));
+      dispatch(SetPassword(''));
     } catch (err) {
       if (err instanceof z.ZodError) {
         // Capture Zod validation errors and map them to the validationErrors state
@@ -77,7 +77,9 @@ const RegisterForm = () => {
             className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             placeholder="Enter your name"
           />
-          {errors.name && <p className="text-red-600 text-sm mt-1">{errors.name}</p>}
+          {errors.name && (
+            <p className="text-red-600 text-sm mt-1">{errors.name}</p>
+          )}
         </div>
 
         <div>
