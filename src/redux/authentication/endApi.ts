@@ -38,7 +38,7 @@ const authApi = baseApi.injectEndpoints({
         params: { priority: priority },
         timeout: 1000
       }),
-      transformResponse: (todo) => todo.reverse(),
+      transformResponse: (todo:Todo[]) => todo.reverse(),
       providesTags: ['todo'],
     }),
   }),
