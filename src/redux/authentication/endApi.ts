@@ -1,9 +1,5 @@
 import { baseApi } from './baseApi';
 
-interface Todo{
-  text : string
-}
-
 const authApi = baseApi.injectEndpoints({
   endpoints: (build) => ({
     signUp: build.mutation({
@@ -38,7 +34,6 @@ const authApi = baseApi.injectEndpoints({
         params: { priority: priority },
         timeout: 1000
       }),
-      transformResponse: (todo:Todo[]) => todo.reverse(),
       providesTags: ['todo'],
     }),
   }),
