@@ -27,6 +27,8 @@ const authApi = baseApi.injectEndpoints({
       invalidatesTags: ['todo'],
     }),
 
+
+    // get all post route here
     getAllpost: build.query({
       query: (priority) => ({
         url: '/post',
