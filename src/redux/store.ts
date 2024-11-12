@@ -6,9 +6,6 @@ import loginReducer from './authentication/LoginSlice';
 import postReducer from './authentication/postSlice';
 import { baseApi } from './authentication/baseApi';
 import { postApi } from './api/PostApi';
-import { createLogger } from 'redux-logger';
-
-const logger = createLogger();
 
 export const store = configureStore({
   reducer: {
@@ -23,8 +20,7 @@ export const store = configureStore({
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({ serializableCheck: false }).concat(
       baseApi.middleware,
-      postApi.middleware,
-      logger
+      postApi.middleware
     ),
 });
 
